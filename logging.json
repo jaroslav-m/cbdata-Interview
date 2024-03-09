@@ -1,0 +1,29 @@
+﻿{
+    "Serilog": {
+        "LevelSwitches": {
+            "$defaultSwitch": "Debug",
+            "$consoleSwitch": "Verbose"
+        },
+        "MinimumLevel": {
+            "ControlledBy": "$defaultSwitch",
+            "Override": {
+                "System": "Warning",
+                "Microsoft": "Warning",
+                "Microsoft.Hosting.Lifetime": "Information"
+            }
+        },
+        "Enrich": [ "WithThreadId", "FromLogContext"/*, "WithMachineName", "WithProcessId"*/ ],
+        "Using": [
+            "Serilog.Sinks.Console"
+        ],
+        "WriteTo": {
+            "Console": {
+                "Name": "Console",
+                "Args": {
+                    "outputTemplate": "{Timestamp:yyyy-MM-ddTHH:mm:ss.fffZ} {Level:u3} [[{Properties:j}]] {Message}{NewLine}{Exception}",
+                    "levelSwitch": "$consoleSwitch"
+                }
+            }
+        }
+    }
+}
